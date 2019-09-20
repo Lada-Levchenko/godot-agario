@@ -12,16 +12,15 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	linear_velocity = Vector2()
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("ui_page_down"):
 		linear_velocity += Vector2(speed, 0)
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("ui_accept"):
 		linear_velocity += Vector2(-speed, 0)
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("ui_home"):
 		linear_velocity += Vector2(0, -speed)
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("ui_end"):
 		linear_velocity += Vector2(0, speed)
 #	pass
-
 
 func eat_food():
 	_increase_hunger()
@@ -34,6 +33,7 @@ func _increase_hunger():
 	sprite.scale += Vector2(0.1, 0.1)
 	collision_shape.scale += Vector2(0.2, 0.2)
 		
+		
 func _physics_process(delta):
 	for collider in get_colliding_bodies():
 		if hunger > collider.hunger:
@@ -42,4 +42,3 @@ func _physics_process(delta):
 			collider.queue_free()
 			_increase_hunger()
 		
-
