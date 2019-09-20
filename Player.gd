@@ -4,7 +4,6 @@ extends RigidBody2D
 # var a = 2
 # var b = "text"
 var speed = 50
-var hunger = 1
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -21,25 +20,3 @@ func _process(delta):
 	if Input.is_action_pressed("ui_down"):
 		linear_velocity += Vector2(0, speed)
 #	pass
-
-
-func eat_food():
-	_increase_hunger()
-	
-	
-func _increase_hunger():
-	hunger += 0.1
-	var sprite = self.get_node("./Health")
-	var collision_shape = self.get_node("./CollisionShape2D")
-	sprite.scale += Vector2(0.1, 0.1)
-	collision_shape.scale += Vector2(0.2, 0.2)
-		
-func _physics_process(delta):
-	for collider in get_colliding_bodies():
-		if hunger > collider.hunger:
-			print(hunger)
-			print(collider.hunger)
-			collider.queue_free()
-			_increase_hunger()
-		
-
